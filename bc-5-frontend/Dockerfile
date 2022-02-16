@@ -10,11 +10,17 @@ RUN yarn install
 
 RUN yarn run build
 
-ENV PATH /usr/src/app/node_modules/.bin:$PATH  
+FROM nginx
 
+WORKDIR /usr/share/nginx/html
 
+RUN rm -rf ./*
 
-FROM nginx:alpine
+COPY --from=build-stage /app/build .
+
+EXPOSE 80
+
+ENTRYPOINT ["nginx","-g","daemon off;"]
 
 WORKDIR /usr/share/nginx/html
 

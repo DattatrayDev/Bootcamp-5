@@ -1,0 +1,49 @@
+version: '3'
+services:
+      
+  
+  # category-management:
+  #   container_name: category-management
+  #   build:
+  #     context: ./bc-5-backend/category-management-service
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 5011:8080
+  #   networks:
+  #     - net
+  review-management:
+    container_name: review-management
+    build:
+      context: ./bc-5-backend/review-management-service
+      dockerfile: Dockerfile
+    ports:
+      - 5011:8080
+    networks:
+      - net
+
+  # user-management:
+  #   container_name: user-management
+  #   build:
+  #     context: ./bc-5-backend/user-management-service
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 5011:8080
+  #   networks:
+  #     - net
+
+
+
+  bc-5-frontend:
+    container_name: front
+    build:
+      context: ./bc-5-frontend
+      dockerfile: Dockerfile
+    ports:
+      - 5010:80
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge
+  
